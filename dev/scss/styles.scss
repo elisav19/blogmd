@@ -19,6 +19,8 @@ $borderRadius: 2px;
 @import "typography";
 @import "components/post";
 @import "forms";
+@import "components/auth";
+@import "components/post";
 
 html {
   display: flex;

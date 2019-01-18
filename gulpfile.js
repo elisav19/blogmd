@@ -6,6 +6,8 @@ const postcss = require('gulp-postcss');
 const  sourcemaps = require('gulp-sourcemaps');
 const log = require('fancy-log');
 const plumber = require('gulp-plumber');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglifyjs');
 
 const sassSourceFile = 'dev/scss/**/*.scss';
 const outputFolder = 'public/stylessheets';
@@ -23,6 +25,16 @@ gulp.task('scss', function (done) {
     .pipe(gulp.dest(outputFolder))
     .on('end', done)
 });
+
+gulp.task('scripts', () =>
+  gulp
+    .src([
+      'dev/js/auth.js'
+    ])
+    .pipe(concat('scripts.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('public/javascripts'))
+);
 
 gulp.task('watch',gulp.series('scss', function (done) {
     gulp.watch(watchedResources, gulp.parallel('scss')); done();
